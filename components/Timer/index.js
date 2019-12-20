@@ -1,43 +1,13 @@
-import React, {Component} from 'react'
-import {View, Text, StyleSheet} from 'react-native'
-import Button from "../Button";
+import { connect } from 'react-redux'
+import Timer from './presenter'
 
-export default class Timer extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.upper}>
-                    <Text style={styles.time}>25:00</Text>
-                </View>
-                <View style={styles.lower}>
-                    <Button iconName={"play-circle"} onPress={()=> alert("play!!")}/>
-                    <Button iconName={"stop-circle"} onPress={()=> alert("stop!!")}/>
-                </View>
-            </View>
-        )
+function mapStateToProps(state) {
+    const { isPlaying, elapsedTime, timerDuration} = state;
+    return {
+        isPlaying,
+        elapsedTime,
+        timerDuration
     }
 }
 
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#ce0b24"
-    },
-    upper: {
-        flex: 2,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    lower: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    time: {
-        color: "white",
-        fontSize: 120,
-        fontWeight: "100"
-    }
-})
+export default connect(mapStateToProps)(Timer)
