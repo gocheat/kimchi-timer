@@ -58,7 +58,7 @@ function applyStartTimer(state){
 function applyRestartTimer(state){
     return {
         ...state,
-        isPlaying: true,
+        isPlaying: false,
         elapsedTime: 0
     }
 }
@@ -72,12 +72,13 @@ function applyAddSecond(state){
 }
 
 // Export Action Creators
-
 const actionCreators = {
     startTimer,
     restartTimer,
     addSecond
 }
+
+export { actionCreators }
 
 // Export Reducer
 export default reducer

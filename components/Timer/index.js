@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Timer from './presenter'
+import { actionCreators  } from '../../reducer'
 
 function mapStateToProps(state) {
     const { isPlaying, elapsedTime, timerDuration} = state;
@@ -10,4 +12,12 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Timer)
+function mapDispatchToProps(dispatch){
+    return {
+        startTimer: bindActionCreators(actionCreators.startTimer, dispatch),
+        restartTimer: bindActionCreators(actionCreators.restartTimer, dispatch),
+        addSecond: bindActionCreators(actionCreators.addSecond, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timer)
