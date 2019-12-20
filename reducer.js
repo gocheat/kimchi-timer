@@ -41,7 +41,7 @@ function reducer(state = initialState, action){
         case RESTART_TIMER:
             return applyRestartTimer(state, action)
         case ADD_SECOND:
-            return applyAddSecond(state)
+            return applyAddSecond(state, action)
         default:
             return state
     }
@@ -51,6 +51,7 @@ function reducer(state = initialState, action){
 function applyStartTimer(state){
     return {
         ...state,
+        elapsedTime: 0,
         isPlaying: true,
     }
 }
@@ -64,10 +65,16 @@ function applyRestartTimer(state){
 }
 
 function applyAddSecond(state){
-    return {
-        ...state,
-        isPlaying: false,
-        elapsedTime: 0
+    if (state.elapsedTime < TIME_DURATION) {
+        return {
+            ...state,
+            elapsedTime: state.elapsedTime + 1
+        }
+    }else{
+        return {
+            ...state,
+            isPlaying: false,
+        }
     }
 }
 
